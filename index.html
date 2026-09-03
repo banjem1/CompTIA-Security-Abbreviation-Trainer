@@ -263,10 +263,10 @@ let stats={r:0,t:0,streak:0,best:0};
 let focusCat=null,mastered=false,srv=0,lastM=null,isRev=false;
 const TODAY=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
 
-import { createClient } from '@supabase/supabase-js'
+
 const supabaseUrl = 'https://rizpbtlreobkqdejjjnh.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpenBidGxyZW9ia3FkZWpqam5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODc0ODMsImV4cCI6MjEwMzE2MzQ4M30.8gqHX9R4viBzlJJyblZv5iIgZnj33dkb5UVQUl5a_c8'
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabase = supabase.createClient(supabaseUrl, supabaseKey)
 
 
 // ── Helpers ──────────────────────────────────────────────────

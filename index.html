@@ -263,8 +263,16 @@ let stats={r:0,t:0,streak:0,best:0};
 let focusCat=null,mastered=false,srv=0,lastM=null,isRev=false;
 const TODAY=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
 
-function save(){try{localStorage.setItem('sp12',JSON.stringify({c:cards.map(c=>({id:c.id,box:c.box,seen:c.seen,pm:c.pm})),si,qSt,best:stats.best}));}catch(e){}}
-function load(){try{const d=JSON.parse(localStorage.getItem('sp12')||'null');if(d){cards=TERMS.map(t=>{const f=d.c?.find(x=>x.id===t.id);return f?{...t,box:f.box,seen:f.seen,pm:f.pm}:t;});si=d.si||0;qSt=d.qSt||{};stats.best=d.best||0;}}catch(e){}}
+const supabaseURL = 'https://rizpbtlreobkqdejjjnh.supabase.co/rest/v1/';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpenBidGxyZW9ia3FkZWpqam5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODc0ODMsImV4cCI6MjEwMzE2MzQ4M30.8gqHX9R4viBzlJJyblZv5iIgZnj33dkb5UVQUl5a_c8';
+const supabase = supabase.createClient(supabaseURL, supabaseKey);
+
+async function save() {
+
+}
+async function load() {
+
+}
 load();
 // ── Helpers ──────────────────────────────────────────────────
 function curSet(){const s=si*SZ;return cards.slice(s,Math.min(s+SZ,cards.length));}

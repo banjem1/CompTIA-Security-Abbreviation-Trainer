@@ -265,7 +265,7 @@ const TODAY=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',d
 
 const supabaseURL = 'https://rizpbtlreobkqdejjjnh.supabase.co/rest/v1/';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpenBidGxyZW9ia3FkZWpqam5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1ODc0ODMsImV4cCI6MjEwMzE2MzQ4M30.8gqHX9R4viBzlJJyblZv5iIgZnj33dkb5UVQUl5a_c8';
-const supabase = supabase.createClient(supabaseURL, supabaseKey);
+const supabase = Supabase.createClient(supabaseURL, supabaseKey);
 
 
 // ── Helpers ──────────────────────────────────────────────────

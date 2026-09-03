@@ -249,6 +249,25 @@ function rshuffle(a){return seededShuffle(a,Math.floor(Math.random()*999999));}
 function $(id){return document.getElementById(id);}
 function on(id,fn){const el=$(id);if(el)el.addEventListener('click',fn);}
 function onq(sel,fn){document.querySelectorAll(sel).forEach(el=>el.addEventListener('click',fn));}
+const STORAGE_KEY='secplus-trainer-state';
+function save(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({cards,qSt,stats,si}));
+}
+function load(){
+  try{
+    const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
+    if(!stored)return;
+    if(Array.isArray(stored.cards)){
+      const savedById=new Map(stored.cards.map(c=>[c.id,c]));
+      cards=cards.map(c=>({...c,...(savedById.get(c.id)||{})}));
+    }
+    if(stored.qSt&&typeof stored.qSt==='object')qSt=stored.qSt;
+    if(stored.stats&&typeof stored.stats==='object')stats={...stats,...stored.stats};
+    if(Number.isInteger(stored.si)&&stored.si>=0&&stored.si<nSets)si=stored.si;
+  }catch(error){
+    localStorage.removeItem(STORAGE_KEY);
+  }
+}
 // ── State ────────────────────────────────────────────────────
 const SZ=20;
 let cards=TERMS.map(t=>({...t}));
@@ -430,5 +449,6 @@ function chkTy(){if(tc||!ti.trim())return;tr=ti.toLowerCase().replace(/[^a-z0-9]
 function advance(){const pool=curSet();if(!pool.length)return;const next=pickNext();card=next;flipped=false;showEx=false;choices=[];picked=null;isRight=null;reviewing=false;ti='';tc=false;tr=null;if(mode==='ch'){const oth=rshuffle(pool.filter(x=>x.id!==next.id)).slice(0,3);choices=rshuffle([next,...oth]);}R();}
 function checkM(){if(curSet().every(c=>c.box>=3)){mastered=true;R();return true;}return false;}
 function startMode(m){mode=m;stats={r:0,t:0,streak:0,best:stats.best};scr='game';if(m==='mp'){cqs=buildQs(null);cqi=0;cqp=null;R();return;}if(m==='eq'){const pool=curSet();eqs=seededShuffle(pool.map(t=>synQ(t,pool)),dateSeed());eqi=0;eqp=null;R();return;}advance();}
+load();
 R();
 </script></body></html>
